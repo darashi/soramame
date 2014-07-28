@@ -2,9 +2,12 @@ package soramame
 
 import (
 	"fmt"
+	"net/http"
 	"strconv"
 	"time"
 
+	"code.google.com/p/go.text/encoding/japanese"
+	"code.google.com/p/go.text/transform"
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -13,11 +16,20 @@ var JST, _ = time.LoadLocation("Asia/Tokyo")
 type Observation struct {
 	Time time.Time
 	PM25 int
+	// TODO retrieve other metrics
 }
 
 type Result struct {
-	Code         string
+	Station
 	Observations []Observation
+}
+
+type Station struct {
+	Code      string
+	Name      string
+	Address   string
+	Authority string
+	Type      string
 }
 
 func parseRow(row *goquery.Selection) (*Observation, error) {
@@ -58,9 +70,7 @@ func parseRow(row *goquery.Selection) (*Observation, error) {
 	return &observation, nil
 }
 
-func Fetch(code string) (*Result, error) {
-	now := time.Now().In(JST)
-	timeString := now.Format("2006010215")
+func fetchObservations(code string, timeString string) ([]Observation, error) {
 	url := fmt.Sprintf(
 		"http://soramame.taiki.go.jp/DataListHyou.php?MstCode=%s&Time=%s",
 		code,
@@ -83,9 +93,67 @@ func Fetch(code string) (*Result, error) {
 			return true
 		},
 	)
+	if err != nil {
+		return nil, err
+	}
+	return observations, nil
+}
+
+func fetchHeader(code string, timeString string) (*Station, error) {
+	url := fmt.Sprintf(
+		"http://soramame.taiki.go.jp/DataListTitle.php?MstCode=%s&Time=%s",
+		code,
+		timeString,
+	)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	reader := transform.NewReader(resp.Body, japanese.EUCJP.NewDecoder())
+
+	doc, err := goquery.NewDocumentFromReader(reader)
+	if err != nil {
+		return nil, err
+	}
+
+	columns := make([]string, 5)
+	doc.Find(
+		"table:first-of-type table:first-child tr td.hyoMenu_List",
+	).Each(
+		func(i int, td *goquery.Selection) {
+			columns[i] = td.Text()
+		},
+	)
+
+	station := Station{
+		Code:      columns[0],
+		Name:      columns[1],
+		Address:   columns[2],
+		Authority: columns[3],
+		Type:      columns[4],
+	}
+
+	return &station, nil
+}
+
+func Fetch(code string) (*Result, error) {
+	now := time.Now().In(JST)
+	timeString := now.Format("2006010215")
+
+	station, err := fetchHeader(code, timeString)
+	if err != nil {
+		return nil, err
+	}
+
+	observations, err := fetchObservations(code, timeString)
+	if err != nil {
+		return nil, err
+	}
 
 	result := Result{
-		Code:         code,
+		Station:      *station,
 		Observations: observations,
 	}
 	return &result, nil
