@@ -1,0 +1,147 @@
+<html>
+<head>
+<link rel="stylesheet" media="all" href="Styles.css" type="text/css">
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<link rel="stylesheet" media="all" href="Styles.css" type="text/css">
+<title>大気汚染物質広域監視システム（そらまめ君）ホームページ</title>
+<script language="javascript" src="JScript1.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+<!--
+function SetData(){
+	if(document.Form1.Err.Value=="undefined"){
+	Err=document.Form1.Err.Value;
+	top.location="ErrMsg.php?Err"+Err;
+	}	
+}
+function OpenGraph(Komoku){
+	if(Komoku<10){
+		Komoku="0"+Komoku;
+	}
+	MstCode=document.Form1.Mst.value;
+	var Url="soramameGraph/GraphWeek.php?MstCode="+MstCode+"&Komoku="+Komoku;
+	   OpenNewWinGraph(Url);    //関数の呼び出し
+}
+
+
+
+-->
+</script>
+
+</head>
+
+<body onLoad="SetData()" bgcolor="white">
+<form name="Form1" action="">
+<input type="hidden" name="Err" value="">
+<input type="hidden" name="Mst" value="01102510">
+<table border="0" style="LEFT:0px; POSITION: absolute; TOP:0px;">
+	<tr><td style="COLOR: #000000; BACKGROUND-COLOR: #99ff00; font-size:14px;">◆　過去7日間の時系列表　◆</td></tr>
+	<tr>
+		<td>
+			<table style="font-size:12px;" class="hyoMenu">
+				<tr class="hyoMenu_Komoku">
+					<th width="100">測定局<br>コード</th>
+					<th width="150">測定局名称</th>
+					<th width="250">住所</th>
+					<th width="100">問い合わせ先</th>
+					<th width="100">局種別</th>
+				</tr>
+				
+				<tr style="font-size:12px;" align="center">
+					<td class="hyoMenu_List">01102510</td>
+					<td class="hyoMenu_List">北１９条</td>
+					<td class="hyoMenu_List" align="left">札幌市北区北１９西２</td>
+					<td class="hyoMenu_List">札幌市</td>
+					<td class="hyoMenu_List">自排局</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			※グラフのアイコンをクリックすると、時系列グラフをご覧になれます。
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			（○：測定）
+		<br>
+			<table style="font-size:12px;" class="hyoMenu" width="870">
+				<tr class="hyoMenu_Komoku">
+				<th width="40" rowspan="4" >年</th>
+				<th width="20" rowspan="4">月</th>
+				<th width="20" rowspan="4">日</th>
+				<th width="20" rowspan="4">時</th>
+				<th width="40">SO2</th>
+				<th width="40">NO</th>
+				<th width="40">NO2</th>
+				<th width="40">NOX</th>
+				<th width="40">CO</th>
+				<th width="40">OX</th>
+				<th width="40">NMHC</th>
+				<th width="40">CH4</th>
+				<th width="40">THC</th>
+				<th width="40">SPM</th>
+				<th width="45">PM2.5</th>
+				<th width="40">SP</th>
+				<th width="40" rowspan="2">WD</th>
+				<th width="40">WS</th>
+				<th width="40">TEMP</th>
+				<th width="40">HUM</th>		
+				</tr>
+				<tr class="hyoMenu_Komoku">
+				<th width="40">ppm</th>
+				<th width="40">ppm</th>
+				<th width="40">ppm</th>
+				<th width="40">ppm</th>
+				<th width="40">ppm</th>
+				<th width="40">ppm</th>
+				<th width="40">ppmC</th>
+				<th width="40">ppmC</th>
+				<th width="40">ppmC</th>
+				<th width="40">mg/m3</th>
+				<th width="45">μg/m3</th>
+				<th width="40">mg/m3</th>
+				<th width="40">m/s</th>
+				<th width="40">℃</th>
+				<th width="40">%</th>		
+				</tr>
+				<tr class="hyoMenu_Komoku">
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">○</td>
+					<td class="MstHyoData">○</td>
+					<td class="MstHyoData">○</td>
+					<td class="MstHyoData">×</td>
+					<td  class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">○</td>
+					<td class="MstHyoData">○</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+					<td class="MstHyoData">×</td>
+				</tr>
+				<tr class="hyoMenu_Komoku">
+				<td align="center" onClick="OpenGraph(01)"><img name="SO2" alt="SO2" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('SO2','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('SO2','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(02)"><img name="NO1" alt="NO" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('NO1','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('NO1','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(03)"><img name="NO2" alt="NO2" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('NO2','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('NO2','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(04)"><img name="NOX" alt="NOx" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('NOX','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('NOX','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(05)"><img name="CO" alt="CO" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('CO','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('CO','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(06)"><img name="OX" alt="Ox" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('OX','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('OX','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(07)"><img name="NMHC" alt="NMHC" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('NMHC','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('NMHC','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(08)"><img name="CH4" alt="CH4" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('CH4','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('CH4','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(09)"><img name="THC" alt="THC" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('THC','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('THC','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(10)"><img name="SPM" alt="SPM" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('SPM','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('SPM','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(25)"><img name="PM25" alt="PM25" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('PM25','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('PM25','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(11)"><img name="SP" alt="SP" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('SP','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('SP','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(21)" colspan="2"><img name="WD" alt="WD" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('WD','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('WD','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(23)"><img name="TEMP" alt="TEMP" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('TEMP','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('TEMP','Btn/Graph/Graph1.gif');"></td>
+				<td align="center" onClick="OpenGraph(24)"><img name="HUM" alt="HUM" src="Btn/Graph/Graph1.gif" width="38" onMouseOver="MouseOver('HUM','Btn/Graph/Graph2.gif');" onMouseOut="MouseOut('HUM','Btn/Graph/Graph1.gif');"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
