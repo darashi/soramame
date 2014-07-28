@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/darashi/pm25/soramame"
+	"github.com/darashi/soramame"
 )
 
 func main() {
