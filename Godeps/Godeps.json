@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/darashi/soramame",
-	"GoVersion": "go1.3",
+	"GoVersion": "go1.4",
 	"Deps": [
 		{
 			"ImportPath": "code.google.com/p/cascadia",
@@ -8,24 +8,21 @@
 			"Rev": "4f03c71bc42ba0015a68bea86422f0ecbb71bf70"
 		},
 		{
-			"ImportPath": "code.google.com/p/go.net/html",
-			"Comment": "null-136",
-			"Rev": "28ff664507e453c4455b8c65e701bbe2b2ac980d"
-		},
-		{
-			"ImportPath": "code.google.com/p/go.text/encoding",
-			"Comment": "null-84",
-			"Rev": "e4132d00dbd1075fe02eca2845c79950e376ba0c"
-		},
-		{
-			"ImportPath": "code.google.com/p/go.text/transform",
-			"Comment": "null-84",
-			"Rev": "e4132d00dbd1075fe02eca2845c79950e376ba0c"
-		},
-		{
 			"ImportPath": "github.com/PuerkitoBio/goquery",
 			"Comment": "v0.3.2-24-g087eeef",
 			"Rev": "087eeef3f29bc41be2b2af93673fae9741c43753"
+		},
+		{
+			"ImportPath": "golang.org/x/net/html",
+			"Rev": "cbcac7bb8415db9b6cb4d1ebab1dc9afbd688b97"
+		},
+		{
+			"ImportPath": "golang.org/x/text/encoding",
+			"Rev": "ef0bf1da95d2b971524f971801f2a4c2d0b4841f"
+		},
+		{
+			"ImportPath": "golang.org/x/text/transform",
+			"Rev": "ef0bf1da95d2b971524f971801f2a4c2d0b4841f"
 		}
 	]
 }
