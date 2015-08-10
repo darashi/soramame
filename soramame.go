@@ -70,14 +70,18 @@ func parseRow(row *goquery.Selection) (*Observation, error) {
 	return &observation, nil
 }
 
-func fetchObservations(code string, timeString string) ([]Observation, error) {
+func fetchObservations(code string, timeString string, httpClient *http.Client) ([]Observation, error) {
 	url := fmt.Sprintf(
 		"http://soramame.taiki.go.jp/DataListHyou.php?MstCode=%s&Time=%s",
 		code,
 		timeString,
 	)
 
-	doc, err := goquery.NewDocument(url)
+	resp, err := httpClient.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	doc, err := goquery.NewDocumentFromResponse(resp)
 	if err != nil {
 		return nil, err
 	}
@@ -99,14 +103,14 @@ func fetchObservations(code string, timeString string) ([]Observation, error) {
 	return observations, nil
 }
 
-func fetchHeader(code string, timeString string) (*Station, error) {
+func fetchHeader(code string, timeString string, httpClient *http.Client) (*Station, error) {
 	url := fmt.Sprintf(
 		"http://soramame.taiki.go.jp/DataListTitle.php?MstCode=%s&Time=%s",
 		code,
 		timeString,
 	)
 
-	resp, err := http.Get(url)
+	resp, err := httpClient.Get(url)
 	if err != nil {
 		return nil, err
 	}
@@ -138,16 +142,20 @@ func fetchHeader(code string, timeString string) (*Station, error) {
 	return &station, nil
 }
 
-func Fetch(code string) (*Result, error) {
+func Fetch(code string, httpClient *http.Client) (*Result, error) {
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+
 	now := time.Now().In(JST)
 	timeString := now.Format("2006010215")
 
-	station, err := fetchHeader(code, timeString)
+	station, err := fetchHeader(code, timeString, httpClient)
 	if err != nil {
 		return nil, err
 	}
 
-	observations, err := fetchObservations(code, timeString)
+	observations, err := fetchObservations(code, timeString, httpClient)
 	if err != nil {
 		return nil, err
 	}
